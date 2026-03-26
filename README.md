@@ -97,6 +97,10 @@ The enrichment pattern — read a document, research it, produce structured outp
 
 All of these follow the same structure: `module_manifest.json` declares the function, an entrypoint script does the work, and a callback delivers results to wherever they're needed.
 
+**A key advantage across all of these use cases: the Istari digital thread.**
+
+Because the agent runs as a registered Istari module, every job is tracked in the platform — who ran it, on what input, when, and what artifact came out. That traceability is automatic. For aerospace and defense workflows where auditability matters, this means every AI-generated analysis, summary, or enrichment has a traceable lineage from input artifact through to output — without any additional logging or audit tooling needed.
+
 ---
 
 ## Setup
