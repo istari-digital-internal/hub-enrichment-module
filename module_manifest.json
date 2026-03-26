@@ -1,0 +1,70 @@
+{
+  "module_name": "@istari:hub_enrichment",
+  "module_display_name": "Istari AI Hub Post Enrichment",
+  "module_version": "0.1.0",
+  "module_type": "function",
+  "module_checksum": "",
+  "internal": true,
+  "tool_key": "claude",
+  "tool_display_name": "Claude (Anthropic)",
+  "tool_versions": ["claude-sonnet-4-6"],
+  "operating_systems": ["Ubuntu 22.04"],
+  "agent_version": ">=9.0.0",
+  "authors": [
+    {
+      "name": "Alec Framm",
+      "email": "aframm@istaridigital.com",
+      "group": "@istari:ai_hub"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "python3",
+      "version": ">=3.11",
+      "tool_type": "auxiliary_tool",
+      "reason": "Runtime interpreter for the enrichment module",
+      "url": "https://www.python.org/"
+    }
+  ],
+  "dev_dependencies": [],
+  "functions": {
+    "@istari:enrich_post": [
+      {
+        "entrypoint": "hub_enrichment/enrich_post.py",
+        "run_command": "python3 {entrypoint} {input_file} {output_file} {temp_dir}",
+        "operating_systems": ["Ubuntu 22.04"],
+        "function_schema": {
+          "inputs": {
+            "post_file": {
+              "type": "user_model",
+              "validation_types": ["@extension:md"],
+              "optional": false,
+              "display_name": "Hub Post Markdown"
+            }
+          },
+          "outputs": [
+            {
+              "name": "enrichment",
+              "type": "file",
+              "required": true,
+              "upload_as": "artifact",
+              "display_name": "Enrichment JSON"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "scripts": [
+    {
+      "operating_systems": ["Ubuntu 22.04"],
+      "install": "scripts/linux/install.sh",
+      "build": {
+        "command": "scripts/linux/build.sh",
+        "output_path": "."
+      },
+      "test_unit": "scripts/linux/test_unit.sh",
+      "clean": "scripts/linux/clean.sh"
+    }
+  ]
+}
