@@ -74,6 +74,31 @@ If you need to manually enrich a post (e.g. re-run enrichment or test without th
 
 ---
 
+## Future use cases
+
+The enrichment pattern — read a document, research it, produce structured output, post a callback — is reusable across a range of internal workflows. Some natural extensions:
+
+**Customer-facing deliverables**
+- Enrich customer-uploaded models or simulation results with AI-generated analysis, relevant literature, and suggested next steps — same callback pattern, different input schema
+- Auto-generate a technical summary and replication guide for any artifact stored in an Istari instance, surfacing it in the platform UI
+
+**Internal knowledge management**
+- Extend to Confluence pages or Jira tickets — post published → agent researches → structured summary and related resources attached automatically
+- Weekly digest generation: batch-enrich all new Hub posts from the past 7 days into a single digest document dispatched to Slack or email
+
+**CS / deployment support**
+- Enrich customer deployment logs or support tickets — agent reads the artifact, cross-references known issues and docs, produces a triage summary
+- Pre-call brief generation: given a customer name, pull recent activity and produce a structured brief (similar to the `/customer-brief` skill but running as an Istari job)
+
+**Expanding the enrichment output**
+- Add a `demo_script` field — a short walkthrough someone could follow live to demo the built thing
+- Add `related_posts` — semantic search against the Hub to surface similar work from other team members
+- Add `customer_applicability` — for each active customer, a one-liner on whether and how this is relevant to their use case
+
+All of these follow the same structure: `module_manifest.json` declares the function, an entrypoint script does the work, and a callback delivers results to wherever they're needed.
+
+---
+
 ## Setup
 
 ### Prerequisites
